@@ -19,6 +19,7 @@ Final Report
 ## Team members
 
 Lucas De Caux - Lead Programmer
+
 Will Tran - Code Checker
 
 
