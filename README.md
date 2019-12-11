@@ -1,22 +1,24 @@
-# Your project name
+# A game of Chess
 
 ## Description
-
-Describe briefly what your project is all about.
+This project aims to build a complete Chess game using Java. The game will be playable by 1-2 people and would follow the conventional rules of chess.
 
 ## Deliverables
 
-List all the things you want to deliver by the end of the semester.
+Working build of Chess game
+Presentation showcasing application
+Final Report
+
 
 ## Features 
-List all the features of your application in the order of priority.
-1. Feature #1
-2. Feature #2
-3. Feature #3 
-...
+1. Ability to select next space to move
+2. Ability for users to select which piece to move next
+3. Once the game is finished, users will be prompted to start another game.
+4. Clock added to keep time during game
 
 ## Team members
 
-* Roger Federer, Team Lead
-* Tiger Woods, Bug Fixer
+Lucas De Caux - Lead Programmer
+Will Tran - Code Checker
+
 
