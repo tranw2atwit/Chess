@@ -20,6 +20,10 @@ This was a project that aims to build a Chess game using Java. The game will be 
 5. All conventional rules of chess. 
 6. Once the game is finished, users will be prompted to start another game.
 
+## Demo Video
+
+## References 
+
 ## Team members
 
 Lucas De Caux - Lead Programmer
