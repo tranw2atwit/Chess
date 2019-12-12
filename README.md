@@ -5,8 +5,10 @@ This was a project that aims to build a Chess game using Java. The game will be 
 
 ## Getting Statred
 
-### Install
+### -Install
 1. Install this application by downloading it from our repository or you can import the game file by copying the link we provide. 
+
+### -Run the Application
 2. You will be able to open it using whichever IDE you would like. 
 3. You can watch our demo video for better instructions. 
 
