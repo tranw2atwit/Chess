@@ -19,6 +19,7 @@ For our project we created chess using javaFX! The game is pvp and it follows th
 4. When your in check you have 3 chances to find a move that saves you, if you cant its game over!
 
 ## Demo Video
+https://www.youtube.com/watch?v=os4RzX4_kf0&feature=youtu.be
 
 ## References 
 https://stackoverflow.com/questions/36566197/javafx-button-with-transparent-background
