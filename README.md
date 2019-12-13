@@ -25,6 +25,9 @@ https://www.youtube.com/watch?v=os4RzX4_kf0&feature=youtu.be
 https://stackoverflow.com/questions/36566197/javafx-button-with-transparent-background
 https://stackoverflow.com/questions/24082063/chessboard-with-automatic-resizing
 
+Art for pieces:
+https://github.com/amir650/BlackWidow-Chess
+
 ## Team members
 
 Lucas De Caux - Lead Programmer
