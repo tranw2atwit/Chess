@@ -1,33 +1,33 @@
 # A game of Chess
 
 ## Description
-This was a project that aims to build a Chess game using Java. The game will be playable by one person and would follow the conventional rules of chess. Chess is a way to excersise your brain and it is a game that can improve your problem-solving skills. It is one of the world's most popular board games and it is easy to learn!
+For our project we created chess using javaFX! The game is pvp and it follows the conventional rules of chess. Chess is a way to excersise your brain and it is a game that can improve your problem-solving skills. It is one of the world's most popular board games and it is easy to learn!
 
-## Getting Statred
+## Getting started
 
 ### -Install
-1. Install this application by downloading it from our repository or you can import the game file by copying the link we provide. 
+1. Download the files in the github repository.
+2. Open them with a java IDE of your choice that has JavaFX installed
 
 ### -Run the Application
-2. You will be able to open it using whichever IDE you would like. 
-3. You can watch our demo video for better instructions. 
+1. Simply run the ChessBoard class and the program will run!
 
 ## Features 
-1. A game board with all the differnt pieces.
-2. Each piece will have their own specific set of rules and movements.
-3. Ability for the user to select which piece they would want to move next.
-4. The game will keep track of previous moves.
-5. All conventional rules of chess. 
-6. Once the game is finished, users will be prompted to start another game.
+1. A chessboard background with white and brown squares, as well as all the different chess pieces
+2. Click on the piece you want to move and the equare where you want to move it to and the piece will be moved if it is valid
+3. It wont allow you to move in a way that will put you into check
+4. When your in check you have 3 chances to find a move that saves you, if you cant its game over!
 
 ## Demo Video
 
 ## References 
+https://stackoverflow.com/questions/36566197/javafx-button-with-transparent-background
+https://stackoverflow.com/questions/24082063/chessboard-with-automatic-resizing
 
 ## Team members
 
 Lucas De Caux - Lead Programmer
 
-Will Tran - Code Checker
+Will Tran - Code Checker & Programmer
 
 
