@@ -19,11 +19,11 @@ import javafx.scene.control.Button;
 import java.util.ArrayList;
 
 public class ChessBoard extends Application {
-    GridPane root = new GridPane();
-    int firstInput = -2;
-    int secondInput = -2;
-    boolean isWhite = true;
-    ArrayList<Piece> Pieces = new ArrayList<Piece>(); 
+    GridPane root = new GridPane(); //were going to put everything on this gridpane
+    int firstInput = -2; //for storing first input from user
+    int secondInput = -2; //for storing second input from user
+    boolean isWhite = true; //keeps track of whose turn it is
+    ArrayList<Piece> Pieces = new ArrayList<Piece>(); //stores all the pieces
     int chosenX; //For storing X values user gives us
     int chosenY; //For storing Y values user gives us
     int chosenIndex; //Storing piece corresponding to chosen x and y values
@@ -32,11 +32,13 @@ public class ChessBoard extends Application {
     int counter = 0; //counts how many attempted moves the player has made while in check
     
     
-    final int size = 8;
+    final int size = 8; 
     int[] row = new int[8];
-    int[] col = new int[8];
+    int[] col = new int[8]; //number of columns and rows in the gridpane
+    
     public void start(Stage primaryStage) {
     	 
+    		//creating and adding pieces to the arraylist
     	    King kingW = new King(4,7,'w');
     	    King kingB = new King(4,0,'b');
     	    Queen queenW = new Queen (3,7,'w');
@@ -84,12 +86,12 @@ public class ChessBoard extends Application {
 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                
+                //creates squares to add to gridpane
             	Rectangle square = new Rectangle();
                 
             	Color color;
                
-                
+                //sets color for square
                 if ((row + col) % 2 == 0) color = Color.WHITE;
                 else color = Color.BROWN;
                 
@@ -98,6 +100,7 @@ public class ChessBoard extends Application {
                 
                 root.add(square, col, row);
                 
+                //binds the square to be 1/8th the size of the window at all times
                 square.widthProperty().bind(root.widthProperty().divide(size));
                 
                 square.heightProperty().bind(root.heightProperty().divide(size));
@@ -108,16 +111,18 @@ public class ChessBoard extends Application {
         
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
+            	//create a new button to add
             	Button temp = new Button("");
+            	//set size for button
             	temp.minWidthProperty().bind(root.widthProperty().divide(8));
             	temp.minHeightProperty().bind(root.heightProperty().divide(8));
+            	//make the button transparent
             	temp.setStyle("-fx-background-color: transparent;");
             	
-            	
+            	//numbers the buttons according to position
             	int numButton= col + 8*row;
                 temp.setId("" + numButton);
                 
-                //THIS IS WHERE ALL THE MAGIC HAPPENS
                 
                 temp.setOnAction(new EventHandler<ActionEvent>() {
                 	int chosenX; //For storing X values user gives us
@@ -130,14 +135,9 @@ public class ChessBoard extends Application {
                     public void handle(ActionEvent e) {
                         System.out.println("id(" + temp.getId()  + ") =  " + numButton);
                         if (firstInput == -2) {
-                        	firstInput = numButton;
-                        } else {
+                        	firstInput = numButton; //stores
+                        } else {//enters this else statement once we have two inputs
                         	secondInput = numButton;
-                        	System.out.println("First: " + firstInput  + " second: "  + secondInput);
-                        	
-                        	
-                        	System.out.println("First x: " + firstInput % 8 + " First y: " + firstInput/8);
-                        	
                         	
                         	if (Pieces.get(0).getAlive() && Pieces.get(8).getAlive()) {
                         		if(isWhite) {
@@ -147,12 +147,12 @@ public class ChessBoard extends Application {
                                     }
                                             
                                            if (check){
-                                               System.out.println("White King is in Check!");
+                                               System.out.println("White King is in Check!"); //tells us the king is in check in console
                                            }
                                             flag = false;
                                             //take in coordinates of piece
-                                            chosenX = firstInput%8;
-                                            chosenY = firstInput/8;
+                                            chosenX = firstInput%8;//gets x value for first input
+                                            chosenY = firstInput/8;//gets y value for first input
                                             System.out.printf("x: %d, y: %d%n", chosenX, chosenY);
                                             chosenIndex = foundPiece(Pieces, chosenX, chosenY); //find the piece with coordinates chosen
                                             if (chosenIndex == -1 || Pieces.get(chosenIndex).getColor() == 'b') {
@@ -162,10 +162,8 @@ public class ChessBoard extends Application {
                                             //only enters this if which gets the location to move to if a valid piece was chosen
                                             if (!(chosenIndex == -1 || Pieces.get(chosenIndex).getColor() == 'b')) {
                                                 //take in coordinates to move to
-                                                System.out.print("x to move to: ");
-                                                chosenX = secondInput%8;
-                                                System.out.print("y to move to: ");
-                                                chosenY = secondInput/8;
+                                                chosenX = secondInput%8;//gets x value from 2nd input
+                                                chosenY = secondInput/8;//gets y value from second input
                                                 System.out.printf("x: %d, y: %d%n", chosenX, chosenY);
                                                 flag = isValidMaster(Pieces, chosenX, chosenY, chosenIndex); //checks if move is valid
                                                 if (!flag) {
@@ -187,10 +185,8 @@ public class ChessBoard extends Application {
                                                     }
                                                 }
                                             }
-                                            System.out.println(flag);
-                                            System.out.println(counter);
                                     if (flag && counter < 3) {
-                                    	isWhite = false;
+                                    	isWhite = false; //sets it so its blacks turn if you made a move
                                     }
                                     
                                     if (counter < 3) {
@@ -206,6 +202,7 @@ public class ChessBoard extends Application {
                                         Pieces.get(chosenIndex).setX(chosenX);
                                         Pieces.get(chosenIndex).setY(chosenY);
                                         
+                                        //the following for loop just checks if there are any pieces on a space and draws them on
                                         for (Node node : root.getChildren()) {
                                         	if (node instanceof Button) {
                                             	((Button) node).setGraphic(null);
@@ -259,8 +256,8 @@ public class ChessBoard extends Application {
                                         }
                                     	}
                                     } else {
-                                        Pieces.get(0).kill();
-                                        //root.setEffect(new GaussianBlur());
+                                        Pieces.get(0).kill(); //kills the king if you failed to exit check
+                                        //following displays game over screen
                                         Rectangle square = new Rectangle();
                                         square.setFill(Color.WHITE);
                                         root.add(square, 0, 0);
@@ -272,8 +269,7 @@ public class ChessBoard extends Application {
                                         t.setFill(Color.BLACK);
                                         root.add(t, 1, 0);
                                     }
-                                    PrintCurrent(Pieces); //print out current pieces
-                        		} else if(!isWhite) {
+                        		} else if(!isWhite) {//if its blacks turn do all this stuff
                                     if (check == false && inCheck(Pieces, 'b', -1, 0, 0)){
                                         check = true; //sets check to true if your in check before making a move
                                         counter = 0; //reset the counter in case it was used before
@@ -295,9 +291,7 @@ public class ChessBoard extends Application {
                                             //only enters this if which gets the location to move to if a valid piece was chosen
                                             if (!(chosenIndex == -1 || Pieces.get(chosenIndex).getColor() == 'w')) {
                                                 //take in coordinates to move to
-                                                System.out.print("x to move to: ");
                                                 chosenX = secondInput%8;
-                                                System.out.print("y to move to: ");
                                                 chosenY = secondInput/8;
                                                 System.out.printf("x: %d, y: %d%n", chosenX, chosenY);
                                                 flag = isValidMaster(Pieces, chosenX, chosenY, chosenIndex); //checks if move is valid
@@ -320,8 +314,6 @@ public class ChessBoard extends Application {
                                                     }
                                                 }
                                             }
-                                    System.out.println(flag);
-                                    System.out.println(counter);
                                     if (flag && counter < 3) {
                                     	isWhite = true;
                                     }
@@ -339,6 +331,7 @@ public class ChessBoard extends Application {
                                         Pieces.get(chosenIndex).setX(chosenX);
                                         Pieces.get(chosenIndex).setY(chosenY);
                                         
+                                      //the following for loop just checks if there are any pieces on a space and draws them on
                                         for (Node node : root.getChildren()) {
                                         	if (node instanceof Button) {
                                             	((Button) node).setGraphic(null);
@@ -392,8 +385,8 @@ public class ChessBoard extends Application {
                                         }
                                     	}
                                     } else {
-                                        Pieces.get(8).kill();
-                                        //root.setEffect(new GaussianBlur());
+                                        Pieces.get(8).kill(); //kills black king if failed to find a way out of check
+                                        //creates the game over screen
                                         Rectangle square = new Rectangle();
                                         square.setFill(Color.WHITE);
                                         root.add(square, 0, 0);
@@ -405,18 +398,18 @@ public class ChessBoard extends Application {
                                         t.setFill(Color.BLACK);
                                         root.add(t, 0, 0);
                                     }
-                                    PrintCurrent(Pieces); //print out current piece
                         		}
                         	} 
-                        	secondInput = -2;
+                        	secondInput = -2; //reset the inputs
                         	firstInput = -2;
                         }    
                     }   	
                 	});
-                root.add(temp, col, row, 1, 1);
+                root.add(temp, col, row, 1, 1); //adds the buttons to the gridpane
         }
         }
         
+        //draws the boardstate before any moves are made
         for (Node node : root.getChildren()) {
         	for (int i = 0; i < Pieces.size(); i++) {
             if (GridPane.getColumnIndex(node) == Pieces.get(i).getX() && GridPane.getRowIndex(node) == Pieces.get(i).getY()) {
@@ -576,45 +569,25 @@ public class ChessBoard extends Application {
         }
     }
     /**
-     * Void method which prints out a visual representation of what the board is like
-     * @param Pieces arraylist of pieces to print out
-     */
-    static void PrintCurrent(ArrayList<Piece> Pieces){
-        System.out.println("  0 1 2 3 4 5 6 7"); //top guide for X position
-        for (int i = 0; i < 8; i++){
-            System.out.print(i); //prints out left guide for Y position
-            for (int j = 0; j < 8; j++){
-                System.out.print("|"); //print out seperator
-                if (foundPiece(Pieces,j,i) != -1){
-                    System.out.print(Pieces.get(foundPiece(Pieces,j,i)).Represent());
-                    //prints out the letter representation of the piece in that space if there is one
-                }else{
-                    //prints out a space to line it up if there is no piece
-                    System.out.print(" ");
-                }
-            }
-            //prints out the last closing line
-            System.out.println("|");
-        }
-    }
-    /**
     *
     * @param Pieces arraylist of pieces
     * @param color color of king to check
     * @param moved if a piece is being moved this is the index
     * @param x x to move the "moved" piece to
     * @param y y to move the "moved" piece to
-    * @return
+    * @return wether or not the color piece is in check
     */
    static Boolean inCheck(ArrayList<Piece> Pieces, char color, int moved, int x, int y) {
-       int originalX = 0;
+       int originalX = 0; 
        int originalY = 0;
        if (moved != -1){
+    	 //store the original values for the piece before we move it
            originalX = Pieces.get(moved).getX();
            originalY = Pieces.get(moved).getY();
            Pieces.get(moved).setX(x);
            Pieces.get(moved).setY(y);
        }
+       //loops through all the pieces and sees if theres a black piece able to capture the white king
        if (color == 'w') {
            for (int i = 0; i < Pieces.size(); i++) {
                if (isValidMaster(Pieces, Pieces.get(0).getX(), Pieces.get(0).getY(), i)){
@@ -633,6 +606,7 @@ public class ChessBoard extends Application {
            }
            return false;
        }
+     //loops through all the pieces and sees if theres a white piece able to capture the black king
        for (int i = 0; i < Pieces.size(); i++) {
            if (isValidMaster(Pieces, Pieces.get(8).getX(), Pieces.get(8).getY(), i)){
                if (moved == -1 || (Pieces.get(i).getX() != Pieces.get(moved).getX() || Pieces.get(i).getY() != Pieces.get(moved).getY())) {
